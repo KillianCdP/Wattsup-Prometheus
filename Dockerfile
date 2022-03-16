@@ -11,4 +11,6 @@ COPY *.go ./
 
 RUN go build -o /WUPExporter
 
+EXPOSE 9091
+
 CMD [ "/WUPExporter" ]
