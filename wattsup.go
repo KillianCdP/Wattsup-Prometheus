@@ -72,13 +72,12 @@ func fromString(s string) (Data, error) {
 
 	var d [18]int
 	var err error
-	for i := offset; i < 18; i++ {
+	for i := offset; i < 18+offset; i++ {
 		d[i-offset], err = strconv.Atoi(fields[i])
 		if err != nil {
 			return Data{}, fmt.Errorf("error while parsing data field %v", fields[i])
 		}
 	}
-	fmt.Println("d", d)
 
 	return Data{
 		Watts:   d[0] / 10,
