@@ -11,92 +11,92 @@ var (
 	watts = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "watts"),
 		"Watts",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	volts = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "volts"),
 		"Volts",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	amps = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "amps"),
 		"Amps",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	wh = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "wh"),
 		"W/h",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	cost = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "cost"),
 		"Cost",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	whpmo = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "whpmo"),
 		"Wh / month",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	costpmo = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "costpmo"),
 		"Cost per month",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	wmax = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "wmax"),
 		"Max watts",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	vmax = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "vmax"),
 		"Max volts",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	amax = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "amax"),
 		"Max amps",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	wmin = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "wmin"),
 		"Min watts",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	vmin = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "vmin"),
 		"Min volts",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	amin = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "amin"),
 		"Min amps",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	pf = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "pf"),
 		"Power factor",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	dc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "dc"),
 		"Duty Cycle",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	pc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "pc"),
 		"Power cycle",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	hz = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "hz"),
 		"Line frequency",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 	va = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "va"),
 		"Volt amps",
-		nil, nil,
+		[]string{"device"}, nil,
 	)
 )
 
@@ -144,22 +144,22 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 		e.port.Reset()
 		return
 	}
-	ch <- prometheus.MustNewConstMetric(watts, prometheus.GaugeValue, float64(data.Watts))
-	ch <- prometheus.MustNewConstMetric(volts, prometheus.GaugeValue, float64(data.Volts))
-	ch <- prometheus.MustNewConstMetric(amps, prometheus.GaugeValue, float64(data.Amps))
-	ch <- prometheus.MustNewConstMetric(wh, prometheus.GaugeValue, float64(data.WH))
-	ch <- prometheus.MustNewConstMetric(cost, prometheus.GaugeValue, float64(data.Cost))
-	ch <- prometheus.MustNewConstMetric(whpmo, prometheus.GaugeValue, float64(data.WHPMo))
-	ch <- prometheus.MustNewConstMetric(costpmo, prometheus.GaugeValue, float64(data.CostPMo))
-	ch <- prometheus.MustNewConstMetric(wmax, prometheus.GaugeValue, float64(data.Wmax))
-	ch <- prometheus.MustNewConstMetric(vmax, prometheus.GaugeValue, float64(data.Vmax))
-	ch <- prometheus.MustNewConstMetric(amax, prometheus.GaugeValue, float64(data.Amax))
-	ch <- prometheus.MustNewConstMetric(wmin, prometheus.GaugeValue, float64(data.Wmin))
-	ch <- prometheus.MustNewConstMetric(vmin, prometheus.GaugeValue, float64(data.Vmin))
-	ch <- prometheus.MustNewConstMetric(amin, prometheus.GaugeValue, float64(data.Amin))
-	ch <- prometheus.MustNewConstMetric(pf, prometheus.GaugeValue, float64(data.PF))
-	ch <- prometheus.MustNewConstMetric(dc, prometheus.GaugeValue, float64(data.DC))
-	ch <- prometheus.MustNewConstMetric(pc, prometheus.GaugeValue, float64(data.PC))
-	ch <- prometheus.MustNewConstMetric(hz, prometheus.GaugeValue, float64(data.Hz))
-	ch <- prometheus.MustNewConstMetric(va, prometheus.GaugeValue, float64(data.VA))
+	ch <- prometheus.MustNewConstMetric(watts, prometheus.GaugeValue, float64(data.Watts), deviceName)
+	ch <- prometheus.MustNewConstMetric(volts, prometheus.GaugeValue, float64(data.Volts), deviceName)
+	ch <- prometheus.MustNewConstMetric(amps, prometheus.GaugeValue, float64(data.Amps), deviceName)
+	ch <- prometheus.MustNewConstMetric(wh, prometheus.GaugeValue, float64(data.WH), deviceName)
+	ch <- prometheus.MustNewConstMetric(cost, prometheus.GaugeValue, float64(data.Cost), deviceName)
+	ch <- prometheus.MustNewConstMetric(whpmo, prometheus.GaugeValue, float64(data.WHPMo), deviceName)
+	ch <- prometheus.MustNewConstMetric(costpmo, prometheus.GaugeValue, float64(data.CostPMo), deviceName)
+	ch <- prometheus.MustNewConstMetric(wmax, prometheus.GaugeValue, float64(data.Wmax), deviceName)
+	ch <- prometheus.MustNewConstMetric(vmax, prometheus.GaugeValue, float64(data.Vmax), deviceName)
+	ch <- prometheus.MustNewConstMetric(amax, prometheus.GaugeValue, float64(data.Amax), deviceName)
+	ch <- prometheus.MustNewConstMetric(wmin, prometheus.GaugeValue, float64(data.Wmin), deviceName)
+	ch <- prometheus.MustNewConstMetric(vmin, prometheus.GaugeValue, float64(data.Vmin), deviceName)
+	ch <- prometheus.MustNewConstMetric(amin, prometheus.GaugeValue, float64(data.Amin), deviceName)
+	ch <- prometheus.MustNewConstMetric(pf, prometheus.GaugeValue, float64(data.PF), deviceName)
+	ch <- prometheus.MustNewConstMetric(dc, prometheus.GaugeValue, float64(data.DC), deviceName)
+	ch <- prometheus.MustNewConstMetric(pc, prometheus.GaugeValue, float64(data.PC), deviceName)
+	ch <- prometheus.MustNewConstMetric(hz, prometheus.GaugeValue, float64(data.Hz), deviceName)
+	ch <- prometheus.MustNewConstMetric(va, prometheus.GaugeValue, float64(data.VA), deviceName)
 }

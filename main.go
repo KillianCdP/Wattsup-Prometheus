@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -20,7 +21,11 @@ var serialMode = &serial.Mode{
 	StopBits: serial.OneStopBit,
 }
 
+var deviceName string
+
 func main() {
+	deviceName = os.Args[1]
+	println(deviceName)
 	http.Handle("/metrics", promhttp.Handler())
 	exporter := NewExporter(interval)
 	prometheus.MustRegister(exporter)
