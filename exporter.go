@@ -105,7 +105,7 @@ type Exporter struct {
 }
 
 func NewExporter(loggingInterval int) *Exporter {
-	port, err := serial.Open("/dev/ttyUSB0", serialMode)
+	port, err := serial.Open(serialPort, serialMode)
 	if err != nil {
 		log.Fatal("Could not open serial port: ", err)
 	}
